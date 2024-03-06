@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('product_stock');
             $table->boolean('is_done')->default(false);
             $table->foreignId('creator_id')->constrained('users')->cascadeOnDelete();
-            // $table->foreignId('category_id')->nullable()->constrained('categories')->cascadeOnDelete();
+            $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }
