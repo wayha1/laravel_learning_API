@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('category');
             $table->string('category_brand');
-            $table->foreignId('creator_id')->constrained('users');
-            $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
-            // $table->foreignId('product_id')->constrained('product');
+            $table->foreignId('creator_id')->constrained('users')->cascadeOnDelete();
+            // $table->foreignId('product_id')->constrained('products');
+            // $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }
