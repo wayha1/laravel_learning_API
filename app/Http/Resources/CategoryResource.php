@@ -19,6 +19,7 @@ class CategoryResource extends JsonResource
             'category' => $this->category,
             'category_brand' => $this->category_brand,
             'products' => ProductResource::collection($this->whenLoaded('products')),
+            'members' => UserResource::collection($this->whenLoaded('members')),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

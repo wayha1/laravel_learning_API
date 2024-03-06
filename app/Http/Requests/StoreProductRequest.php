@@ -32,9 +32,10 @@ class StoreProductRequest extends FormRequest
             'product_stock' => 'required|integer',
             'category_id' => [
                 'nullable',
-                Rule::exists('categories', 'id')->where(function ($query) {
-                    $query->where('creator_id', Auth::id());
-                })
+                Rule::in(Auth::user()->memberships->pluck('id')),
+                // exists('categories', 'id')->where(function ($query) {
+                //     $query->where('creator_id', Auth::id());
+                // }),
             ],
             //
         ];

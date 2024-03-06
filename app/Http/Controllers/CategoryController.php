@@ -14,6 +14,9 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class CategoryController extends Controller
 {
+    public function __construct(){
+        $this->authorizeResource(Category::class, 'category');
+    }
     public function index()
     {
         $categories = QueryBuilder::for(Category::class)
@@ -32,7 +35,10 @@ class CategoryController extends Controller
 
     public function show(Request $request, Category $category)
     {
-        return (new CategoryResource($category))->load('products');
+        return (new CategoryResource($category))
+        ->load('products')
+        ->load('members');
+        
     }
 
     public function update(UpdateCategoryRequest $request, Category $category)

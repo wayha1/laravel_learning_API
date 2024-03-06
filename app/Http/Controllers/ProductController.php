@@ -14,6 +14,9 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class ProductController extends Controller
 {
+    public function __construct(){
+        $this->authorizeResource(Product::class, 'product');
+    }
     //
     public function index(Request $request)
     {
