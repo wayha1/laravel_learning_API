@@ -42,11 +42,13 @@ class Product extends Model
     }
 
     public static function booted(): void
-    {
-        static::addGlobalScope('member', function (Builder $builder) 
-        {
-            $builder->where('creator_id', Auth::id())
-                ->orWhereIn('category_id', Auth::user()->memberships->pluck('id'));
+{
+    static::addGlobalScope('member', function (Builder $builder) {
+        $builder-> where(function ($query) {
+            $query->where('creator_id', optional(Auth::user())->id)
+                ->orWhereIn('category_id', optional(Auth::user())->memberships->pluck('id')->toArray());
         });
-    }
+    });
+}
+
 }
